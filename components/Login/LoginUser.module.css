@@ -1,0 +1,37 @@
+.loginMain {
+  position: fixed;
+  background-color: #004f70;
+  height: 100%;
+  width: 100%;
+}
+
+.loginBox {
+  position: absolute;
+  width: 315.01px;
+  height: 520.4px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  background: #ffffff;
+  box-shadow: 2px 2px 11px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+}
+
+.textBox {
+  position: absolute;
+  margin-top: 7rem;
+  margin-left: 3rem;
+  text-align: center;
+}
+.headingSecondary {
+  font-size: 25px;
+  font-weight: 700;
+}
+.subText {
+  margin-top: 1rem;
+}
+
+.inputFields {
+  position: relative;
+}

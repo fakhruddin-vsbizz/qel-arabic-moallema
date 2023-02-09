@@ -1,0 +1,45 @@
+.colorLayout {
+  border: 2px solid grey;
+  width: 45rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  background-color: white;
+  position: absolute;
+  margin-left: 15rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+.mainBtn {
+  padding: 1.5rem;
+  margin: 1rem;
+  margin-top: 1.5rem;
+  border-radius: 5px;
+  border: 1.5px solid grey;
+  margin-bottom: 2rem;
+  transition: all 0.1s ease-out;
+}
+.mainBtn:hover {
+  transform: translateY(-10%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+.text {
+  color: grey;
+  border-bottom: 1px solid grey;
+}
+.sideBar {
+  float: right;
+  margin-right: 15rem;
+  margin-top: 2rem;
+  border: 2px solid grey;
+  width: 19rem;
+  height: 10.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  background-color: white;
+}
+.selectedColor {
+  position: absolute;
+  margin-top: -2.5rem;
+  margin-left: 7rem;
+}
