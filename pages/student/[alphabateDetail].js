@@ -7,6 +7,7 @@ const index = () => {
   const router = useRouter();
   const id = router.query.alphabateDetail;
 
+  //accessing id
   console.log(id);
   return <>{id && <ActivityDetail id={id} />}</>;
 };
