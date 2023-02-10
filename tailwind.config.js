@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         "dark-purple": "#004F70",
         "light-white": "rgba(255,255,255,0.17)",
+        "dark-black": "#111827",
       },
     },
   },

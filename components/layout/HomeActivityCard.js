@@ -9,7 +9,7 @@ const HomeActivityCard = ({ name, title, letter }) => {
     <div>
       <div className=" w-32 h-26 mt-6 rounded overflow-hidden shadow-lg mr-4  items-center justify-center bg-slate-50 py-2 ">
         <Link
-          href={`student/${title}`}
+          href={`activity/${title}`}
           onClick={nameHandler}
           className="font-extrabold text-center text-dark-purple"
         >

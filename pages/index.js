@@ -17,9 +17,14 @@ export default function Home() {
   const loggedIn = authCtx.isLoggedIn;
   const typeAdmin = authCtx.userType === "admin" ? true : false;
   const typeTeacher = authCtx.userType === "instructor" ? true : false;
+  const typeStudent = authCtx.userType === "student" ? true : false;
 
   if (typeTeacher && loggedIn) {
     router.replace("/teacher/batches");
+  }
+
+  if (typeStudent && loggedIn) {
+    router.replace("/student");
   }
 
   console.log("Email: ", authCtx.userEmail);
@@ -35,8 +40,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         {!loggedIn && <LoginUser />}
-        {loggedIn && typeAdmin && <Admin 
-        />}
+        {loggedIn && typeAdmin && <Admin />}
         {/* {!typeAdmin && !loggedIn && <StudentAccount />} */}
       </main>
     </>

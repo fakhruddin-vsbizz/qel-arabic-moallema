@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ColorOptions from "../Activity/Canvas/ColorOptions";
-import MainCanvas from "../Activity/Canvas/MainCanvas";
+
 import DrawingCanvas from "../Activity/Canvas/DrawingCanvas";
 
 const LetterDetails = (props) => {
@@ -84,11 +84,11 @@ const LetterDetails = (props) => {
                     Start Drawing
                   </h2>
 
-                  <div className="grid grid-cols-2 mx-0 mt-5">
-                    <div className="m-4 span-cols-2 md:span-cols-1">
+                  <div className="grid md:grid-cols-2 sm:grid-cols-1  mx-0 mt-5 ">
+                    <div className="m-4 span-cols-2 ">
                       <DrawingCanvas color={getColor} />
                     </div>
-                    <div className="p-24 m-5 span-cols-2 md:span-cols-1 ">
+                    <div className="m-5 span-cols-2 md:grid-col-1  p-24 sm:-mt-16 ">
                       <ColorOptions finalColor={changeColorPri} />
                     </div>
                   </div>
