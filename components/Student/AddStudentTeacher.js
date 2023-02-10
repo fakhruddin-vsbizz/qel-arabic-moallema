@@ -45,6 +45,7 @@ const AddStudentTeacher = () => {
         .from("student_teacher_verification")
         .insert({
           email: enteredEmailValue,
+          type: user,
         })
         .select();
     }
