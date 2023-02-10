@@ -1,10 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../store/auth-context";
 import supabase from "@/supabaseClient";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
 const ManageStudentTeacherData = (props) => {
+  const [requestedStudent, setRequestedStudent] = useState([]);
+  const [varified, setVarified] = useState(true);
   const router = useRouter();
   const path =
     router.pathname === "/admin/students/add-student" ? "students" : "teachers";
@@ -25,6 +27,45 @@ const ManageStudentTeacherData = (props) => {
       );
   }, []);
 
+  useEffect(() => {
+    supabase
+      .from("student_teacher_verification")
+      .select("*")
+      .eq("type", path)
+      .then((response) => setRequestedStudent(response.data));
+  }, []);
+
+  ///////////////////STUDENT//////////////////////
+  let varifiedStudentTeacher;
+  if (people && requestedStudent) {
+    varifiedStudentTeacher = people.filter((table1Item) =>
+      requestedStudent.some(
+        (table2Item) => table2Item.email === table1Item.email
+      )
+    );
+  }
+
+  let unvarifiedStudentTeacher;
+  if (varifiedStudentTeacher) {
+    unvarifiedStudentTeacher = requestedStudent.filter(
+      (table1Item) =>
+        !varifiedStudentTeacher.some(
+          (table2Item) => table2Item.email === table1Item.email
+        )
+    );
+  }
+
+  console.log("unvarified Students/teacher: ", unvarifiedStudentTeacher);
+
+  console.log("requested: ", requestedStudent);
+
+  const varifiedHandler = () => {
+    setVarified((prev) => !prev);
+  };
+
+  let list = varified ? people : unvarifiedStudentTeacher;
+
+  console.log(varified);
   return (
     <div className="bg-slate-100 h-auto">
       <div className="px-4 sm:px-6 lg:px-8 ">
@@ -35,10 +76,16 @@ const ManageStudentTeacherData = (props) => {
               className="inline-flex items-center p-1 cursor-pointer dark:bg-gray-300 dark:text-gray-800 rounded-sm"
             >
               <input id="Toggle4" type="checkbox" className="hidden peer" />
-              <span className="px-4 py-2 dark:bg-gray-500 peer-checked:dark:bg-gray-300 rounded-sm">
+              <span
+                onClick={varifiedHandler}
+                className="px-4 py-2 dark:bg-gray-500 peer-checked:dark:bg-gray-300 rounded-sm"
+              >
                 Varified {path}
               </span>
-              <span className="px-4 py-2 dark:bg-gray-300 peer-checked:dark:bg-orange-400 rounded-sm">
+              <span
+                onClick={varifiedHandler}
+                className="px-4 py-2 dark:bg-gray-300 peer-checked:dark:bg-orange-400 rounded-sm"
+              >
                 Un-Varified {path}
               </span>
             </label>
@@ -56,33 +103,31 @@ const ManageStudentTeacherData = (props) => {
                         scope="col"
                         className="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-6"
                       >
-                        Name
+                        {varified ? <p>Name</p> : <p>Email</p>}
                       </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
-                      >
-                        Contact
-                      </th>
+                      {varified ? (
+                        <th
+                          scope="col"
+                          className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                        >
+                          Contact
+                        </th>
+                      ) : (
+                        <p></p>
+                      )}
                       <th
                         scope="col"
                         className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
                       >
                         Role
                       </th>
-                      <th
-                        scope="col"
-                        className="relative py-3 pl-3 pr-4 sm:pr-6"
-                      >
-                        <span className="sr-only">Edit</span>
-                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {people.map((person) => (
+                    {list.map((person) => (
                       <tr key={person.email}>
                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                          {person.name}
+                          {person.email}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {person.contact}
@@ -90,14 +135,18 @@ const ManageStudentTeacherData = (props) => {
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                           {person.type}
                         </td>
-                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                          <Link
-                            href={`${person.email}/${path}`}
-                            className="text-indigo-600 hover:text-indigo-900"
-                          >
-                            View Profile
-                          </Link>
-                        </td>
+                        {varified ? (
+                          <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                            <Link
+                              href={`${person.email}/${path}`}
+                              className="text-indigo-600 hover:text-indigo-900"
+                            >
+                              View Profile
+                            </Link>
+                          </td>
+                        ) : (
+                          <p></p>
+                        )}
                       </tr>
                     ))}
                   </tbody>

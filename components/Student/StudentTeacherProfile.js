@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import Navigation from "../layout/Navigation";
 import supabase from "@/supabaseClient";
 import AddStudentToBatch from "../batches/AddStudentToBatch";
+import { createClient } from "@supabase/supabase-js";
+import DeleteConfirmation from "../layout/DeleteConfirmation";
+import { useRouter } from "next/router";
 
 const StudentTeacherProfile = (props) => {
+  const router = useRouter();
   const [profileData, setProfileData] = useState([{}]);
   const [batchdata, setBatchData] = useState([]);
+  const [showRemoveUser, setShowRemoveUser] = useState(false);
 
   const [showAddBatch, setShowAddBatch] = useState(false);
   const type = props.role;
@@ -30,6 +35,83 @@ const StudentTeacherProfile = (props) => {
   //show/hide the pop-up form
   const addStudentToBatch = () => {
     setShowAddBatch((prev) => !prev);
+  };
+  const removeUserHandler = () => {
+    setShowRemoveUser((prev) => !prev);
+  };
+
+  const deleteUserByEmail = async () => {
+    const supabase1 = createClient(
+      "https://cdwdhedavgkgpexhthtx.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNkd2RoZWRhdmdrZ3BleGh0aHR4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY3NDcwNTQ1MiwiZXhwIjoxOTkwMjgxNDUyfQ.nYUbBvX4zKMmpc2ECrl9Aznvqoa6J5YqQ8kIsYwWZ_M",
+      {
+        auth: {
+          autoRefreshToken: false,
+          persistSession: false,
+        },
+      }
+    );
+    if (profileData[0].type === "student") {
+      //remove from the relation
+      const { data1, error1 } = await supabase
+        .from("batch_student_relation")
+        .delete()
+        .match({ student_id: profileData[0].email });
+
+      //remove from the relation
+      const { data3, error3 } = await supabase
+        .from("students")
+        .delete()
+        .match({ email: profileData[0].email });
+    }
+
+    if (profileData[0].type === "instructor") {
+      console.log("inside teacher");
+      //remove from the relation
+      const { data3, error3 } = await supabase
+        .from("teachers")
+        .delete()
+        .match({ email: profileData[0].email });
+
+      const { data4, error4 } = await supabase
+        .from("batches")
+        .delete()
+        .match({ teacher_email: profileData[0].email });
+    }
+
+    if (profileData[0].type === "instructor") {
+      console.log("inside teacher");
+      //remove from the relation
+      const { data3, error3 } = await supabase
+        .from("teachers")
+        .delete()
+        .match({ email: profileData[0].email });
+    }
+
+    const { data, error } = await supabase1.auth.admin.listUsers();
+    const userList = data.users;
+
+    const deleteUser = userList.filter(
+      (user) => user.email === profileData[0].email
+    );
+
+    const userId = deleteUser[0].id;
+    console.log(userId);
+
+    if (userId) {
+      console.log("inside");
+      const { data1, error1 } = await supabase1.auth.admin.deleteUser(userId);
+      console.log(data1);
+    }
+    /////////////////////////////////////////////////////////////
+
+    //remove from the student_teacher_varification
+    const { data2, error2 } = await supabase
+      .from("student_teacher_verification")
+      .delete()
+      .match({ email: profileData[0].email });
+
+    router.replace("/");
   };
 
   return (
@@ -106,7 +188,7 @@ const StudentTeacherProfile = (props) => {
           </div>
           <div className="rounded-m w-20d"></div>
           <button
-            type="submit"
+            onClick={removeUserHandler}
             className="group relative w-full flex justify-center
             py-2 px-4 border border-transparent text-sm font-medium
             rounded-md text-white bg-red-600 hover:bg-yellow-600
@@ -114,7 +196,7 @@ const StudentTeacherProfile = (props) => {
             focus:ring-orange-500 mt-4 mb-4"
           >
             <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
-            Remove Student
+            Remove {profileData[0].type}
           </button>
           {type === "students" && (
             <button
@@ -149,6 +231,14 @@ const StudentTeacherProfile = (props) => {
             show={setShowAddBatch}
             studentEmail={profileData[0].email}
             batch={batchdata}
+          />
+        )}
+        {showRemoveUser && (
+          <DeleteConfirmation
+            title={`Remove ${profileData[0].type}`}
+            desc={"You are removing the user permanently"}
+            deleteUser={deleteUserByEmail}
+            close={removeUserHandler}
           />
         )}
       </div>
