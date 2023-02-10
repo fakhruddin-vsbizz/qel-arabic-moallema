@@ -60,12 +60,6 @@ const LoginForm = () => {
 
     console.log("type: ", userType);
 
-    if (userType === "student") {
-      router.replace("/home");
-    }
-    if (userType === "instructor") {
-      router.replace("/Instructor");
-    }
     if (userType === "admin") {
       router.replace("/admin");
     }

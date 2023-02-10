@@ -14,7 +14,7 @@ const Sidebar = (props) => {
       <div
         className={` ${
           open ? "w-72" : "w-20 "
-        } bg-dark-purple h-screen p-5  pt-8 relative duration-300`}
+        } bg-dark-black h-screen p-5  pt-8 relative duration-300`}
       >
         <img
           src="https://static.thenounproject.com/png/1195182-200.png"

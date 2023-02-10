@@ -11,7 +11,7 @@ const Index = () => {
   return (
     <div className="bg-slate-300 pb-20">
       <Navigation />
-      <BatchDetails batchId={batchId} />
+      <BatchDetails batchId={batchId} type="admin" />
     </div>
   );
 };
