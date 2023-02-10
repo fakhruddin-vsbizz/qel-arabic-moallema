@@ -40,25 +40,25 @@ const StudentListCard = ({ email, type, batch, enrollStudents, click }) => {
     <>
       {type === "addedStudents" && (
         <div className="m-2">
-          <div className="flex  text-sm font-medium text-gray-700 shadow sm:rounded-md p-2 ">
-            <span className="mt-1 font-normal w-4/5  ">
+          <div className="flex p-2 text-sm font-medium text-gray-700 shadow sm:rounded-md ">
+            <span className="w-4/5 mt-1 font-normal ">
               <img
                 class="inline-block h-8 w-8 mx-3 rounded-full ring-2 ring-white"
                 src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
               />
               {email}
             </span>
-            <span id="" className="mt-1 ml-10 font-semibold w-2/5  ">
+            <span id="" className="w-2/5 mt-1 ml-10 font-semibold ">
               {" "}
               <button
                 onClick={studentProfile}
-                className="mr-auto ml-5 text-blue-500 hover:text-blue-700  px-2 font-normal "
+                className="px-2 ml-5 mr-auto font-normal text-blue-500 hover:text-blue-700 "
               >
                 View
               </button>
               <button
                 onClick={removeStudentFromBatch}
-                className="mr-auto  text-red-500 px-2 hover:text-red-700   font-normal "
+                className="px-2 mr-auto font-normal text-red-500 hover:text-red-700 "
               >
                 Remove
               </button>
@@ -68,8 +68,8 @@ const StudentListCard = ({ email, type, batch, enrollStudents, click }) => {
       )}
       {type !== "addedStudents" && (
         <div className="m-2">
-          <div className="flex  text-sm font-medium text-gray-700 shadow sm:rounded-md p-2 ">
-            <span className="mt-1 font-normal w-4/5  ">
+          <div className="flex p-2 text-sm font-medium text-gray-700 shadow sm:rounded-md ">
+            <span className="w-4/5 mt-1 font-normal ">
               <img
                 class="inline-block h-8 w-8 mx-3 rounded-full ring-2 ring-white"
                 src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
@@ -77,15 +77,15 @@ const StudentListCard = ({ email, type, batch, enrollStudents, click }) => {
               {email}
             </span>
             <span id="" className="mt-1 ml-2 font-semibold ">
-              {present && <span className=" text-red-500">Enrolled</span>}
+              {present && <span className="text-red-500 ">Enrolled</span>}
             </span>
-            <span id="" className="mt-1 ml-2 font-semibold  ">
+            <span id="" className="mt-1 ml-2 font-semibold ">
               {!present && (
                 <button
                   onClick={addStudentToBatch}
-                  className="inline-flex justify-center rounded-md border border-transparent bg-green-700 py-1 px-2 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="inline-flex justify-center px-2 py-1 text-sm font-medium text-white bg-green-700 border border-transparent rounded-md shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  {!added && <span className="font-bold px-1 "> + </span>}
+                  {!added && <span className="px-1 font-bold "> + </span>}
                   {added && <p>Added &#10003;</p>}
                 </button>
               )}

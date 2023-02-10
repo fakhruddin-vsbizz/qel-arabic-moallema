@@ -7,8 +7,7 @@ const index = () => {
     <>
       <div className="">
         <Navigation />
-        <div className="mt-10 flex justify-center items-center">
-          <h2>Branches</h2>
+        <div className="flex items-center justify-center mt-10">
           <Batches />
         </div>
       </div>

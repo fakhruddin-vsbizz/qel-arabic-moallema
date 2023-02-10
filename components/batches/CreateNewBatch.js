@@ -84,12 +84,12 @@ const CreateNewBatch = () => {
     <>
       <div className="mt-10 sm:mt-20">
         <div className="md:grid md:grid-cols-3 md:gap-6">
-          <div className="md:col-span-1 bg-gray-400">
-            <div className="px-4 items-center justify-center  mt-44 pl-12">
-              <h2 className=" text-3xl  font-medium leading-6 text-gray-700 mb-4 ">
+          <div className="bg-gray-400 md:col-span-1">
+            <div className="items-center justify-center px-4 pl-12 mt-44">
+              <h2 className="mb-4 text-3xl font-medium leading-6 text-gray-700 ">
                 Create Batch
               </h2>
-              <p className="mt-1 text-sms text-gray-600">
+              <p className="mt-1 text-gray-600 text-sms">
                 Enter the details to create a new batch
               </p>
             </div>
@@ -97,7 +97,7 @@ const CreateNewBatch = () => {
           <div className="mt-5 md:col-span-2 md:mt-0">
             <form onSubmit={onBatchCreateHandler}>
               <div className="overflow-hidden shadow sm:rounded-md md:mx-5">
-                <div className="bg-white px-4 py-5 sm:p-6">
+                <div className="px-4 py-5 bg-white sm:p-6">
                   <div className="grid grid-cols-6 gap-6 ">
                     <div className="col-span-6">
                       <div className="grid grid-cols-8 gap-3">
@@ -115,7 +115,7 @@ const CreateNewBatch = () => {
                             ref={nameRef}
                             autoComplete="given-name"
                             required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           />
                         </div>
                         <div className="col-span-8 sm:col-span-4">
@@ -132,15 +132,15 @@ const CreateNewBatch = () => {
                             ref={bookNameRef}
                             required
                             autoComplete="given-name"
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           />
                         </div>
                       </div>
                     </div>
 
                     <div className="col-span-6">
-                      <div className="grid grid-cols-8 gap-3">
-                        <div className="col-span-8 sm:col-span-4">
+                      <div className="grid grid-cols-9 gap-3">
+                        <div className="col-span-9 sm:col-span-3">
                           <label
                             htmlFor="Teacher"
                             className="block text-sm font-medium text-gray-700"
@@ -153,13 +153,13 @@ const CreateNewBatch = () => {
                             ref={typeRef}
                             autoComplete="teacher-name"
                             required
-                            className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                           >
                             <option>Adult</option>
                             <option>Kid</option>
                           </select>
                         </div>
-                        <div className="col-span-8 sm:col-span-4">
+                        <div className="col-span-9 sm:col-span-3">
                           <label
                             htmlFor="Type"
                             className="block text-sm font-medium text-gray-700"
@@ -170,7 +170,7 @@ const CreateNewBatch = () => {
                           <select
                             ref={teacherNameRef}
                             required
-                            className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                            className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                           >
                             {options.map((option) => (
                               <option key={option.id} value={option.email}>
@@ -179,24 +179,33 @@ const CreateNewBatch = () => {
                             ))}
                           </select>
                         </div>
+                        <div className="col-span-9 sm:col-span-3">
+                        <label
+                            htmlFor="gmeet"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Add Google Meet
+                          </label>
+                        <input type="text" name="gmeet" placeholder="G Meet Link"  className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
+                        </div>
                       </div>
                     </div>
 
-                    <div className="col-span-6  daily-on">
+                    <div className="col-span-6 daily-on">
                       <h4 className="my-2">Weekly on.</h4>
-                      <div className="grid grid-cols-8 sm:grid-cols-7 gap-3 lg:gap-5">
+                      <div className="grid grid-cols-8 gap-3 sm:grid-cols-7 lg:gap-5">
                         {days.map((day) => (
-                          <div className="col-span-2 sm:col-span-1 pl-1  pb-3 appearance-none rounded-md cursor-pointer border-2 border-gray-300 shadow-sm">
+                          <div className="col-span-2 pb-3 pl-1 border-2 border-gray-300 rounded-md shadow-sm appearance-none cursor-pointer sm:col-span-1">
                             <input
                               type="checkbox"
                               value={day}
                               onChange={handleChange}
                               checked={selectedDays.includes(day)}
-                              className="mt-1 block day-card appearance-none focus:outline-none border-solid rounded-full after:border-none focus:border-none sm:text-sm"
+                              className="block mt-1 border-solid rounded-full appearance-none day-card focus:outline-none after:border-none focus:border-none sm:text-sm"
                             />
                             <label
                               htmlFor="mon"
-                              className="block text-sm font-medium text-center cursor-pointer text-gray-700"
+                              className="block text-sm font-medium text-center text-gray-700 cursor-pointer"
                             >
                               {day}
                             </label>
@@ -220,7 +229,7 @@ const CreateNewBatch = () => {
                             id="time"
                             ref={timeRef}
                             required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           />
                         </div>
                         <div className="col-span-8 sm:col-span-4">
@@ -236,7 +245,7 @@ const CreateNewBatch = () => {
                             id="date"
                             ref={dateRef}
                             required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           />
                         </div>
                       </div>
@@ -244,10 +253,10 @@ const CreateNewBatch = () => {
                   </div>
                 </div>
                 {error && <p className="text-red-400">{error}</p>}
-                <div className="bg-gray-50 px-4 py-3 text-right sm:px-6 items-center">
+                <div className="items-center px-4 py-3 text-right bg-gray-50 sm:px-6">
                   <button
                     type="submit"
-                    className="inline-flex justify-center w-full rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     Create Batch
                   </button>
