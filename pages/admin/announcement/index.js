@@ -1,12 +1,13 @@
 import AnnouncementForm from "@/components/Announcement/AnnouncementForm";
 import Navigation from "@/components/layout/Navigation";
+import Announcement from "@/components/Teacher/Announcement";
 import React from "react";
 
 const index = () => {
   return (
-    <div className="h-screen bg-slate-300">
+    <div className="h-screen bg-slate-100">
       <Navigation />
-      <AnnouncementForm />
+      <Announcement />
     </div>
   );
 };
