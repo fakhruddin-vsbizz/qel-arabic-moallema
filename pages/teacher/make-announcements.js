@@ -10,10 +10,9 @@ const MakeAnnouncements = () => {
         <Navigation />
       <div className="flex">
       <TeacherSidebar/>
-      <div  className="flex-1 h-screen p-7">
+      <div  className="flex-1 h-full p-7">
       {/* {Menus.map((Menu, index) => ( */}
-        <div className="m-0" >
-        Make Announcements
+        <div className="p-0 m-0" >
         <Announcement/>
         </div>
         {/* ))} */}
