@@ -1,11 +1,11 @@
-import Link from "next/link";
-import supabase from "@/supabaseClient";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import BatchContext from "../store/batch-context";
 
-const StudentListCardTeacher = ({ email, setAttendance, enrollStudents }) => {
+const StudentListCardTeacher = ({ email, enrollStudents, operation }) => {
   const [selectedStudent, setSelectedStudent] = useState([]);
+  const batchCtx = useContext(BatchContext);
 
+  //getting the selected students
   const handleChange = (event) => {
     const student = event.target.value;
     if (event.target.checked) {
@@ -18,7 +18,12 @@ const StudentListCardTeacher = ({ email, setAttendance, enrollStudents }) => {
       );
     }
   };
-  setAttendance(selectedStudent);
+
+  //setting the student to batch context
+  console.log(selectedStudent);
+  if (selectedStudent[0]) {
+    batchCtx.setAttendanceList(selectedStudent);
+  }
 
   return (
     <>
@@ -34,18 +39,20 @@ const StudentListCardTeacher = ({ email, setAttendance, enrollStudents }) => {
                 {user.student_id}
               </span>
 
-              <span id="" className="mt-1 ml-10 font-semibold w-2/5  ">
-                <span className="mr-auto  text-gray-500 p-2   hover:text-gray-700   font-normal ">
-                  Mark Attendance
+              {operation === "attendanceList" && (
+                <span id="" className="mt-1 ml-10 font-semibold w-2/5  ">
+                  <span className="mr-auto  text-gray-500 p-2   hover:text-gray-700   font-normal ">
+                    Mark Attendance
+                  </span>
+                  <input
+                    type="checkbox"
+                    value={user.student_id}
+                    onChange={handleChange}
+                    checked={selectedStudent.includes(user.student_id)}
+                    className="m-1"
+                  />
                 </span>
-                <input
-                  type="checkbox"
-                  value={user.student_id}
-                  onChange={handleChange}
-                  checked={selectedStudent.includes(user.student_id)}
-                  className="m-1"
-                />
-              </span>
+              )}
             </div>
           ))}
         </div>

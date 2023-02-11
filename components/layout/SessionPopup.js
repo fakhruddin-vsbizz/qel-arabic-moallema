@@ -1,17 +1,11 @@
-import React from "react";
-import supabase from "@/supabaseClient"
-import { useState, useEffect, useRef, useContext } from "react";;
-import StudentListCard from "./StudentListCard";
-import StudentListCardTeacher from "./StudentListCardTeacher";
+import React, { useState } from "react";
 
-const SessionPopup = ({ session }) => {
+const SessionPopup = ({ session, list, start }) => {
   const submitHandler = (e) => {
     e.preventDefault();
+    start();
     session(false);
   };
-  // const router = useRouter();
-
-  // const [added, setAdded] = useState(false);
 
   return (
     <div className="fixed inset-x-0 bottom-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center">
@@ -20,7 +14,6 @@ const SessionPopup = ({ session }) => {
       </div>
       <div className="overflow-hidden transition-all transform bg-white rounded-lg shadow-xl sm:max-w-lg sm:w-full">
         <form onSubmit={submitHandler} className="px-10 py-10 mb-4">
-          {/* <p className="mb-4 "> The session is currently going on</p> */}
           <div className="items-center justify-center ">
             <div class="grid grid-cols-4 gap-4  mb-5 ">
               <div class="col-span-3 ">
@@ -29,17 +22,7 @@ const SessionPopup = ({ session }) => {
                 </h3>
               </div>
             </div>
-            {/* {batchStudents.map((student) => ( 
-                    <StudentListCard
-                      email={student.student_id}
-                      type={"addedStudents"}
-                      enrollStudents={batchStudents}
-                      batch={detail[0].batch_name}
-                      click={setClicked}
-                    />
-                   ))} */}
-
-                   Student XYZ
+            {list}
           </div>
 
           <button
