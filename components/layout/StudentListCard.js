@@ -2,8 +2,16 @@ import Link from "next/link";
 import supabase from "@/supabaseClient";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
-const StudentListCard = ({ email, type, batch, enrollStudents, click }) => {
+const StudentListCard = ({
+  email,
+  type,
+  batch,
+  enrollStudents,
+  click,
+  typeTeacher,
+}) => {
   const router = useRouter();
 
   const [added, setAdded] = useState(false);
@@ -20,7 +28,7 @@ const StudentListCard = ({ email, type, batch, enrollStudents, click }) => {
       .insert({ student_id: email, batch_id: batch })
       .select();
     setAdded(true);
-    click(true);
+    click((prev) => !prev);
   };
 
   const removeStudentFromBatch = async () => {
@@ -33,7 +41,7 @@ const StudentListCard = ({ email, type, batch, enrollStudents, click }) => {
     if (error) {
       console.log(error);
     }
-    click(true);
+    click((prev) => !prev);
   };
 
   return (
@@ -80,16 +88,16 @@ const StudentListCard = ({ email, type, batch, enrollStudents, click }) => {
               {present && <span className="text-red-500 ">Enrolled</span>}
             </span>
             <span id="" className="mt-1 ml-2 font-semibold ">
-              {!present && (
+              {!present && !added && (
                 <button
-                  onClick={addStudentToBatch}
+                  onClick={!added && addStudentToBatch}
                   className="inline-flex justify-center px-2 py-1 text-sm font-medium text-white bg-green-700 border border-transparent rounded-md shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                  {!added && <span className="px-1 font-bold "> + </span>}
-                  {added && <p>Added &#10003;</p>}
+                  {!added && <span className="px-1 font-bold ">+</span>}
                 </button>
               )}
             </span>
+            {added && !present && <LoadingSpinner />}
           </div>
         </div>
       )}
