@@ -13,28 +13,28 @@ const StudentListBatch = () => {
       .then((response) => authCtx.setStudentsData(response.data));
   }, []);
   return (
-    <div className="mt-8 flex flex-col items-center">
-      <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-          <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg bg-white mt-8">
-            <table className="min-w-full divide-y w-44 divide-gray-300 mr-96">
+    <div className="flex flex-col items-center mt-8">
+      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="inline-block w-5/6 min-w-full py-2 align-middle md:px-6 lg:px-8">
+          <div className="mt-8 overflow-hidden bg-white shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-300">
               <thead className="bg-gray-50">
                 <tr>
                   <th
                     scope="col"
-                    className="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-6"
+                    className="py-3 pl-4 pr-3 text-xs font-medium tracking-wide text-left text-gray-500 uppercase sm:pl-6"
                   >
                     Name
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                    className="px-3 py-3 text-xs font-medium tracking-wide text-left text-gray-500 uppercase"
                   >
                     Contact
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                    className="px-3 py-3 text-xs font-medium tracking-wide text-left text-gray-500 uppercase"
                   >
                     Role
                   </th>
@@ -43,19 +43,19 @@ const StudentListBatch = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 bg-white">
+              <tbody className="bg-white divide-y divide-gray-200">
                 {people.map((person) => (
                   <tr key={person.email}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                    <td className="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6">
                       {person.name}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                       {person.contact}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                       {person.type}
                     </td>
-                    <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                    <td className="relative py-4 pl-3 pr-4 text-sm font-medium text-right whitespace-nowrap sm:pr-6">
                       <Link
                         href={`${person.email}}`}
                         className="text-indigo-600 hover:text-indigo-900"

@@ -20,24 +20,24 @@ const Batches = () => {
 
   return (
     <>
-      <div className="bg-slate-100 w-full">
+      <div className="w-full bg-slate-100">
         <div className="px-4 sm:px-6 lg:px-8 ">
           <div>
             <div class="flex items-center justify-center mb-3 mt-2">
               <label
                 for="Toggle4"
-                className="inline-flex items-center p-1 cursor-pointer dark:bg-gray-300 dark:text-gray-800 rounded-sm"
+                className="inline-flex items-center p-1 rounded-sm cursor-pointer dark:bg-gray-300 dark:text-gray-800"
               >
                 <input id="Toggle4" type="checkbox" className="hidden peer" />
                 <span
                   onClick={showCreateBatchHandler}
-                  className="px-4 py-2 dark:bg-gray-500 peer-checked:dark:bg-gray-300 rounded-sm"
+                  className="px-4 py-2 rounded-sm dark:bg-gray-500 peer-checked:dark:bg-gray-300"
                 >
                   Create Batch
                 </span>
                 <span
                   onClick={showCreateBatchHandler2}
-                  className="px-4 py-2 dark:bg-gray-300 peer-checked:dark:bg-orange-400 rounded-sm"
+                  className="px-4 py-2 rounded-sm dark:bg-gray-300 peer-checked:dark:bg-orange-400"
                 >
                   View Batches
                 </span>

@@ -10,6 +10,7 @@ const AuthContext = React.createContext({
   setUserType: (type) => {},
   setStudentsData: (data) => {},
   setTeachersData: (data) => {},
+  // setAdminData: (data) => {},
   setBatchesData: (data) => {},
   studentsList: [],
   teachersList: [],

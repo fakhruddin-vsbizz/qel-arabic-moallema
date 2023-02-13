@@ -21,7 +21,7 @@ const Announcement = () => {
             <ShowAnnouncement clicked={updateState} />
           </div>
         </div>
-      </div>
+        </div>
     </>
   );
 };

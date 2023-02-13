@@ -255,7 +255,7 @@ const BatchDetails = (props) => {
                   <div class="grid grid-cols-4 gap-4 mb-5 ">
                     <div class="col-span-3 ">
                       <h3 className="mb-4 text-2xl font-medium leading-6 text-gray-700 ">
-                        Google Meet
+                        Google Meet 
                       </h3>
                     </div>
                   </div>
@@ -269,6 +269,8 @@ const BatchDetails = (props) => {
                           onChange={(event) => setGmeet(event.target.value)}
                           className="w-4/6 border-2 rounded-md"
                         />
+                        
+                        <button onChange={(event) => setGmeet(event.target.value)} className="w-1/6 p-2 mx-4 text-sm font-semibold text-center text-white border border-transparent rounded-md group bg-dark-purple focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">Update Link</button>
 
                         <Link
                           href={detail[0].g_meet} // "https://meet.google.com/"

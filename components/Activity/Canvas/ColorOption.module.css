@@ -3,15 +3,14 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   background-color: white;
+  
 }
 
 .mainBtn {
-  padding: 1.5rem;
-  margin: 1rem;
-  margin-top: 1.5rem;
+  padding: 1rem;
+  margin: 0.5rem;
   border-radius: 5px;
   border: 1.5px solid grey;
-  margin-bottom: 2rem;
   transition: all 0.1s ease-out;
 }
 .mainBtn:hover {
@@ -27,4 +26,8 @@
   position: absolute;
   margin-top: -2.5rem;
   margin-left: 7rem;
+}
+
+@media (min-1200) {
+  
 }

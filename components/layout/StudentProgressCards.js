@@ -7,9 +7,9 @@ const StudentProgressCards = ({ name, getName }) => {
 
   return (
     <>
-      <div className=" hover:bg-dark-purple hover:text-white w-44 h-16 rounded overflow-hidden shadow-lg inline-block mr-4 ml-4 items-center justify-center bg-slate-50 pt-4">
-        <button onClick={batchDetailHandler} className=" text-center ">
-          <div className="font-bold text-xl">{name}</div>
+      <div className="items-center justify-center inline-block h-24 pt-4 ml-4 mr-4 overflow-hidden rounded shadow-lg hover:bg-dark-purple hover:text-white w-44 bg-slate-50">
+        <button onClick={batchDetailHandler} className="text-center ">
+          <div className="text-xl font-bold">{name}</div>
         </button>
       </div>
     </>
