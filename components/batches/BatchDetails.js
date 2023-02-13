@@ -265,13 +265,13 @@ const BatchDetails = (props) => {
                         <input
                           type="text"
                           placeholder="G Meet Link"
-                          value={gmeet}
+                          value={detail[0].g_meet}
                           onChange={(event) => setGmeet(event.target.value)}
                           className="w-4/6 border-2 rounded-md"
                         />
 
                         <Link
-                          href={gmeet} // "https://meet.google.com/"
+                          href={detail[0].g_meet} // "https://meet.google.com/"
                           // href="/teacher/batches/batch-detail/118"
                           className="w-2/6 p-2 mx-4 text-sm font-semibold text-center text-white border border-transparent rounded-md group bg-dark-purple focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
                           target="_blank"

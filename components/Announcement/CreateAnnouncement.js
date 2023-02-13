@@ -1,168 +1,172 @@
-import React from 'react'
+import React, { useContext, useRef, useEffect, useState } from "react";
+import AuthContext from "../store/auth-context";
+import supabase from "@/supabaseClient";
 
-const CreateAnnouncement = () => {
+const Group = ["Both", "teachers", "students"];
+
+const CreateAnnouncement = (props) => {
+  const auth = useContext(AuthContext);
+
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+
+  const titleRef = useRef();
+  const batchNameRef = useRef();
+  const decriptionRef = useRef();
+
+  const options = auth.batchesList;
+
+  useEffect(() => {
+    supabase
+      .from("batches")
+      .select("*")
+      .then((res) => auth.setBatchesData(res.data));
+  }, []);
+
+  console.log("as");
+  const onAnnouncementHandler = async (e) => {
+    e.preventDefault();
+
+    //getting the values
+    const title = titleRef.current.value;
+    const batch = batchNameRef.current.value;
+    const description = decriptionRef.current.value;
+
+    let groupValue;
+
+    if (selectedValue === "Both") {
+      groupValue = 0;
+    } else if (selectedValue === "teachers") {
+      groupValue = 1;
+    } else if (selectedValue === "students") {
+      groupValue = 2;
+    }
+
+    console.log(title);
+    console.log(batch);
+    console.log(groupValue);
+    console.log(description);
+
+    const { data, err } = await supabase.from("announcement").insert({
+      batch_id: batch,
+      group: groupValue,
+      title: title,
+      description: description,
+    });
+
+    props.update();
+  };
+
   return (
     <>
- 
-        
-        <div className="mt-5 md:col-span-2 md:mt-0">
-          {/* <form onSubmit={onBatchCreateHandler}> */}
-          <h2 className="px-4 py-5 mb-4 text-3xl font-medium leading-6 text-gray-800">
-              Create Announcement
-            </h2>
-            <div className="overflow-hidden shadow sm:rounded-md md:mx-5">
-              <div className="px-4 py-5 bg-white sm:p-6">
-                <div className="grid grid-cols-6 gap-6 ">
-                  <div className="col-span-6">
-                    <div className="grid grid-cols-3 gap-3">
-                      <div className="col-span-4">
-                        <h3>Announcement</h3>
-                        <label
-                          htmlFor="batch-name"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Title
-                        </label>
-                        <input
-                          type="text"
-                          name="batch-name"
-                          id="first-name"
-                        //   ref={nameRef}
-                        //   autoComplete="given-name"
-                          required
-                          className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        />
-                      </div>
-                      <div className="col-span-4">
+      <div className="mt-5 md:col-span-2 md:mt-0">
+        {/* <form onSubmit={onBatchCreateHandler}> */}
+        <h2 className="px-4 py-5 mb-4 text-3xl font-medium leading-6 text-gray-800">
+          Create Announcement
+        </h2>
+        <form onSubmit={onAnnouncementHandler}>
+          <div className="overflow-hidden shadow sm:rounded-md md:mx-5">
+            <div className="px-4 py-5 bg-white sm:p-6">
+              <div className="grid grid-cols-6 gap-6 ">
+                <div className="col-span-6">
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="col-span-4">
+                      <h3>Announcement</h3>
                       <label
-                            htmlFor="Type"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Select Batch
-                          </label>
+                        htmlFor="batch-name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Title
+                      </label>
+                      <input
+                        ref={titleRef}
+                        type="text"
+                        name="batch-name"
+                        id="first-name"
+                        required
+                        className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
+                    </div>
+                    <div className="col-span-9 sm:col-span-3">
+                      <label
+                        htmlFor="Type"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Select Batch
+                      </label>
 
-                          <select
-                            // ref={teacherNameRef}
-                            required
-                            className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                          >
-                            {/* {options.map((option) => ( */}
-                              <option 
-                              // key={option.id} 
-                              // value={option.email}
-                              >
-                              {/* {option.name} */}
-                              --Select Batch--
-                              </option>
-                              <option>                              
-                              All
-                              </option>
-                              <option>                              
-                              Batch 1
-                              </option>
-                              <option>                              
-                              Batch 2
-                              </option>
-                            {/* ))} */}
-                          </select>
-                      </div>
-                      <div className="col-span-4">
+                      <select
+                        ref={batchNameRef}
+                        required
+                        className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      >
+                        {options.map((option) => (
+                          <option key={option.id} value={option.batch_name}>
+                            {option.batch_name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-span-4">
                       <h1>Select User Group</h1>
                       <div className="grid grid-cols-3 gap-5 lg:gap-10">
-                        {/* {days.map((day) => ( */}
-                            
+                        {Group.map((item) => (
                           <div className="col-span-2 pb-3 pl-1 border-2 border-gray-300 rounded-md shadow-sm appearance-none cursor-pointer sm:col-span-1">
                             <input
+                              value={item}
                               type="radio"
-                              value="all"
-                              id='all'
-                              name='user'
-                              // onChange={handleChange}
-                              // checked={selectedDays.includes(day)}
+                              onChange={handleChange}
+                              name="user"
                               className="block mt-1 border-solid rounded-full appearance-none day-card focus:outline-none after:border-none focus:border-none sm:text-sm"
                             />
                             <label
                               htmlFor="all"
                               className="block text-sm font-medium text-center text-gray-700 cursor-pointer"
                             >
-                              Both
+                              {item}
                             </label>
                           </div>
-                          <div className="col-span-2 pb-3 pl-1 border-2 border-gray-300 rounded-md shadow-sm appearance-none cursor-pointer sm:col-span-1">
-                            <input
-                              type="radio"
-                              value="teacher"
-                              id='teacher'
-                              name='user'
-                              // onChange={handleChange}
-                              // checked={selectedDays.includes(day)}
-                              className="block mt-1 border-solid rounded-full appearance-none day-card focus:outline-none after:border-none focus:border-none sm:text-sm"
-                            />
-                            <label
-                              htmlFor="teacher"
-                              className="block text-sm font-medium text-center text-gray-700 cursor-pointer"
-                            >
-                              teacher
-                            </label>
-                          </div>
-                          <div className="col-span-2 pb-3 pl-1 border-2 border-gray-300 rounded-md shadow-sm appearance-none cursor-pointer sm:col-span-1">
-                            <input
-                              type="radio"
-                              value="student"
-                              id='student'
-                              name='user'
-                              // onChange={handleChange}
-                              // checked={selectedDays.includes(day)}
-                              className="block mt-1 border-solid rounded-full appearance-none day-card focus:outline-none after:border-none focus:border-none sm:text-sm"
-                            />
-                            <label
-                              htmlFor="student"
-                              className="block text-sm font-medium text-center text-gray-700 cursor-pointer"
-                            >
-                              student
-                            </label>
-                          </div>
-                        {/* ))} */}
-                      </div>
-                      </div>
-                      <div className="col-span-4">
-                        <label
-                          htmlFor="book-name"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Discription
-                        </label>
-                        <input
-                          type="text"
-                          name="book-name"
-                          id="book-name"
-                        //   ref={bookNameRef}
-                          required
-                        //   autoComplete="given-name"
-                          className="block w-full h-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        />
+                        ))}
                       </div>
                     </div>
+                    <div className="col-span-4">
+                      <label
+                        htmlFor="book-name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Discription
+                      </label>
+                      <input
+                        ref={decriptionRef}
+                        type="text"
+                        name="book-name"
+                        id="book-name"
+                        required
+                        className="block w-full h-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      />
+                    </div>
                   </div>
-
-                  
                 </div>
               </div>
-              
-              <div className="items-center px-4 py-3 text-right bg-gray-50 sm:px-6">
-                <button
-                  type="submit"
-                  className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Make Announcement
-                </button>
-              </div>
             </div>
-          {/* </form> */}
-        </div>
-       
-  </>
-  )
-}
 
-export default CreateAnnouncement
+            <div className="items-center px-4 py-3 text-right bg-gray-50 sm:px-6">
+              <button
+                type="submit"
+                className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Make Announcement
+              </button>
+            </div>
+          </div>
+        </form>
+        {/* </form> */}
+      </div>
+    </>
+  );
+};
+
+export default CreateAnnouncement;

@@ -23,6 +23,7 @@ const CreateNewBatch = () => {
   const teacherNameRef = useRef();
   const timeRef = useRef();
   const dateRef = useRef();
+  const gmeetLink = useRef();
 
   const authCtx = useContext(AuthContext);
   let options = authCtx.teachersList;
@@ -44,6 +45,7 @@ const CreateNewBatch = () => {
     const enteredTeacherEmail = teacherNameRef.current.value;
     const time = timeRef.current.value;
     const date = dateRef.current.value;
+    const glink = gmeetLink.current.value;
 
     const obj = {
       days: selectedDays,
@@ -70,6 +72,7 @@ const CreateNewBatch = () => {
         type: enteredType,
         book_name: enteredBookName,
         schedule: obj,
+        g_meet: glink,
       })
       .select();
 
@@ -180,13 +183,19 @@ const CreateNewBatch = () => {
                           </select>
                         </div>
                         <div className="col-span-9 sm:col-span-3">
-                        <label
+                          <label
                             htmlFor="gmeet"
                             className="block text-sm font-medium text-gray-700"
                           >
                             Add Google Meet
                           </label>
-                        <input type="text" name="gmeet" placeholder="G Meet Link"  className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" />
+                          <input
+                            ref={gmeetLink}
+                            type="text"
+                            name="gmeet"
+                            placeholder="G Meet Link"
+                            className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                          />
                         </div>
                       </div>
                     </div>
