@@ -34,6 +34,98 @@ const CreateAnnouncement = () => {
                         />
                       </div>
                       <div className="col-span-4">
+                      <label
+                            htmlFor="Type"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Select Batch
+                          </label>
+
+                          <select
+                            // ref={teacherNameRef}
+                            required
+                            className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                          >
+                            {/* {options.map((option) => ( */}
+                              <option 
+                              // key={option.id} 
+                              // value={option.email}
+                              >
+                              {/* {option.name} */}
+                              --Select Batch--
+                              </option>
+                              <option>                              
+                              All
+                              </option>
+                              <option>                              
+                              Batch 1
+                              </option>
+                              <option>                              
+                              Batch 2
+                              </option>
+                            {/* ))} */}
+                          </select>
+                      </div>
+                      <div className="col-span-4">
+                      <h1>Select User Group</h1>
+                      <div className="grid grid-cols-3 gap-5 lg:gap-10">
+                        {/* {days.map((day) => ( */}
+                            
+                          <div className="col-span-2 pb-3 pl-1 border-2 border-gray-300 rounded-md shadow-sm appearance-none cursor-pointer sm:col-span-1">
+                            <input
+                              type="radio"
+                              value="all"
+                              id='all'
+                              name='user'
+                              // onChange={handleChange}
+                              // checked={selectedDays.includes(day)}
+                              className="block mt-1 border-solid rounded-full appearance-none day-card focus:outline-none after:border-none focus:border-none sm:text-sm"
+                            />
+                            <label
+                              htmlFor="all"
+                              className="block text-sm font-medium text-center text-gray-700 cursor-pointer"
+                            >
+                              Both
+                            </label>
+                          </div>
+                          <div className="col-span-2 pb-3 pl-1 border-2 border-gray-300 rounded-md shadow-sm appearance-none cursor-pointer sm:col-span-1">
+                            <input
+                              type="radio"
+                              value="teacher"
+                              id='teacher'
+                              name='user'
+                              // onChange={handleChange}
+                              // checked={selectedDays.includes(day)}
+                              className="block mt-1 border-solid rounded-full appearance-none day-card focus:outline-none after:border-none focus:border-none sm:text-sm"
+                            />
+                            <label
+                              htmlFor="teacher"
+                              className="block text-sm font-medium text-center text-gray-700 cursor-pointer"
+                            >
+                              teacher
+                            </label>
+                          </div>
+                          <div className="col-span-2 pb-3 pl-1 border-2 border-gray-300 rounded-md shadow-sm appearance-none cursor-pointer sm:col-span-1">
+                            <input
+                              type="radio"
+                              value="student"
+                              id='student'
+                              name='user'
+                              // onChange={handleChange}
+                              // checked={selectedDays.includes(day)}
+                              className="block mt-1 border-solid rounded-full appearance-none day-card focus:outline-none after:border-none focus:border-none sm:text-sm"
+                            />
+                            <label
+                              htmlFor="student"
+                              className="block text-sm font-medium text-center text-gray-700 cursor-pointer"
+                            >
+                              student
+                            </label>
+                          </div>
+                        {/* ))} */}
+                      </div>
+                      </div>
+                      <div className="col-span-4">
                         <label
                           htmlFor="book-name"
                           className="block text-sm font-medium text-gray-700"

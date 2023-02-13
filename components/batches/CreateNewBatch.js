@@ -198,13 +198,15 @@ const CreateNewBatch = () => {
                           <div className="col-span-2 pb-3 pl-1 border-2 border-gray-300 rounded-md shadow-sm appearance-none cursor-pointer sm:col-span-1">
                             <input
                               type="checkbox"
+                              id={day}
                               value={day}
+                              name={day}
                               onChange={handleChange}
                               checked={selectedDays.includes(day)}
                               className="block mt-1 border-solid rounded-full appearance-none day-card focus:outline-none after:border-none focus:border-none sm:text-sm"
                             />
                             <label
-                              htmlFor="mon"
+                              htmlFor={day}
                               className="block text-sm font-medium text-center text-gray-700 cursor-pointer"
                             >
                               {day}
