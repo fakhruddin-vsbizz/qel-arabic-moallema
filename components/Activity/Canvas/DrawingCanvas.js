@@ -24,8 +24,8 @@ const DrawingCanvas = (props) => {
   }
   useEffect(() => {
     canvas = canvasRef.current;
-    canvas.width = 600;
-    canvas.height = 500;
+    canvas.width = 580;
+    canvas.height = 200;
 
     context = canvas.getContext("2d");
     context.lineCap = "round";
@@ -96,30 +96,32 @@ const DrawingCanvas = (props) => {
 
   return (
     <>
-      <div className=" ">
+      <div className="w-full cursor-cell">
         <canvas
-          className=" bg-white border-1 rounded-lg shadow-lg border-2"
+          className="bg-white border-2 rounded-lg shadow-lg border-1"
           ref={canvasRef}
           onMouseDown={startDrawing}
           onMouseMove={draw}
           onMouseUp={stopDrawing}
           onMouseLeave={stopDrawing}
         ></canvas>
-        <div className="mt-8 ml-20">
-          <button
+        
+      </div>
+      <div className="mt-8 ml-20">
+          {/* <button
             onClick={setToDraw}
-            className=" px-4 py-2 bg-dark-purple rounded-md text-white ml-4 hover:bg-dark-purple hover:shadow-lg"
+            className="px-4 py-2 ml-4 text-white rounded-md bg-dark-purple hover:bg-dark-purple hover:shadow-lg"
           >
             Draw
           </button>
           <button
             onClick={setToErase}
-            className=" px-4 py-2 bg-dark-purple rounded-md text-white ml-4 hover:bg-dark-purple hover:shadow-lg"
+            className="px-4 py-2 ml-4 text-white rounded-md bg-dark-purple hover:bg-dark-purple hover:shadow-lg"
           >
             Erase
-          </button>
+          </button> */}
           <a
-            className=" md:mt-40  p-3 bg-red-500 rounded-md text-white ml-4 hover:bg-red-600 hover:shadow-lg"
+            className="p-3 ml-4 text-white bg-red-500 rounded-md md:mt-40 hover:bg-red-600 hover:shadow-lg"
             id="download_image_link"
             href="download_link"
             onClick={saveImageToLocal}
@@ -127,7 +129,6 @@ const DrawingCanvas = (props) => {
             Submit Activity
           </a>
         </div>
-      </div>
     </>
   );
 };

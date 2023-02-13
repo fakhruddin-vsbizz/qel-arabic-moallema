@@ -84,12 +84,12 @@ const LetterDetails = (props) => {
                     Start Drawing
                   </h2>
 
-                  <div className="grid md:grid-cols-2 sm:grid-cols-1  mx-0 mt-5 ">
-                    <div className="m-4 span-cols-2 ">
-                      <DrawingCanvas color={getColor} />
-                    </div>
-                    <div className="m-5 span-cols-2 md:grid-col-1  p-24 sm:-mt-16 ">
+                  <div className="grid w-full grid-cols-8 mx-0 mt-5">
+                    <div className="col-span-3 p-24 m-5 sm:-mt-16">
                       <ColorOptions finalColor={changeColorPri} />
+                    </div>
+                    <div className="w-full col-span-5 m-4 ">
+                      <DrawingCanvas color={getColor} className="w-full " />
                     </div>
                   </div>
                 </div>
