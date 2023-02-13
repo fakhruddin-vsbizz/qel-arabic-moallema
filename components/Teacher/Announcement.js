@@ -9,7 +9,6 @@ const Announcement = () => {
   };
   return (
     <>
-<<<<<<< Updated upstream
       <div className="">
         <div className=" md:grid md:grid-cols-4 md:gap-6">
           <div className="mt-4 md:col-span-2 ">
@@ -21,22 +20,8 @@ const Announcement = () => {
           <div className=" md:col-span-2">
             <ShowAnnouncement clicked={updateState} />
           </div>
-=======
-    <div className="">
-      <div className=" md:grid md:grid-cols-4 md:gap-6">
-        
-        <div className="mt-4 md:col-span-2 ">
-           {/* <form onSubmit={onBatchCreateHandler}>  */}
-           
-            <CreateAnnouncement/>
-          {/* </form> */}
-        </div> 
-        <div className=" md:col-span-2">
-        
-          <ShowAnnouncement/>
->>>>>>> Stashed changes
         </div>
-      </div>
+        </div>
     </>
   );
 };
