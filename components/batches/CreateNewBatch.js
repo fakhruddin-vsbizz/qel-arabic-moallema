@@ -1,11 +1,31 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import AuthContext from "../store/auth-context";
 import supabase from "@/supabaseClient";
+import SuccessPrompt from "../layout/SuccessPrompt";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const CreateNewBatch = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const [selectedDays, setSelectedDays] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
+
+  function convertTimeTo12HourFormat(time) {
+    // Split the time into hours and minutes
+    let [hours, minutes] = time.split(":");
+
+    // Convert the hours to 12-hour format
+    let hours12 = (hours % 12 || 12).toString();
+
+    // Add leading zero to hours and minutes if they are single digits
+    hours12 = hours12.padStart(2, "0");
+    minutes = minutes.padStart(2, "0");
+
+    // Determine the AM/PM suffix based on the hours
+    const ampm = hours >= 12 ? "PM" : "AM";
+
+    // Return the time in 12-hour format with AM/PM suffix
+    return `${hours12}:${minutes} ${ampm}`;
+  }
 
   const handleChange = (event) => {
     const day = event.target.value;
@@ -35,6 +55,14 @@ const CreateNewBatch = () => {
       .then((response) => authCtx.setTeachersData(response.data));
   }, []);
 
+  function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
+    const day = today.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
   const onBatchCreateHandler = async (e) => {
     e.preventDefault();
 
@@ -47,9 +75,13 @@ const CreateNewBatch = () => {
     const date = dateRef.current.value;
     const glink = gmeetLink.current.value;
 
+    let finalTime = convertTimeTo12HourFormat(time);
+
+    console.log("finalTime: ", finalTime);
+
     const obj = {
       days: selectedDays,
-      time: time,
+      time: finalTime,
       startDate: date,
       batchName: enteredBatchName,
     };
@@ -58,13 +90,12 @@ const CreateNewBatch = () => {
     console.log(enteredBookName);
     console.log(enteredType);
     console.log(enteredTeacherEmail);
-    console.log(time);
+
     console.log(date);
     console.log(selectedDays);
 
     //Inserting the Student data into student table
-
-    const { data1, errorTable } = await supabase
+    supabase
       .from("batches")
       .insert({
         batch_name: enteredBatchName,
@@ -74,18 +105,40 @@ const CreateNewBatch = () => {
         schedule: obj,
         g_meet: glink,
       })
-      .select();
-
-    if (errorTable) {
-      setError("Teacher already added to the selected");
-      console.log(errorTable);
+      .select()
+      .then((response) => {
+        console.log(response.data);
+        console.log(response.error);
+        if (response.data) {
+          setError(false);
+          setSubmitted(true);
+          nameRef.current.value = "";
+          bookNameRef.current.value = "";
+          timeRef.current.value = "";
+          dateRef.current.value = "";
+          dateRef.current.value = "";
+          setSelectedDays([]);
+        }
+        if (response.error) {
+          setError(true);
+        }
+      });
+    if (error) {
       return;
     }
+
+    console.log("er: ", error);
   };
 
   return (
     <>
       <div className="mt-10 sm:mt-20">
+        {submitted && (
+          <SuccessPrompt
+            title="Batch Created Successfully"
+            setSubmitted={setSubmitted}
+          />
+        )}
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="bg-gray-400 md:col-span-1">
             <div className="items-center justify-center px-4 pl-12 mt-44">
@@ -120,6 +173,11 @@ const CreateNewBatch = () => {
                             required
                             className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           />
+                          {error && (
+                            <p className=" text-red-500 mt-2">
+                              Batch already exists
+                            </p>
+                          )}
                         </div>
                         <div className="col-span-8 sm:col-span-4">
                           <label
@@ -193,6 +251,7 @@ const CreateNewBatch = () => {
                             ref={gmeetLink}
                             type="text"
                             name="gmeet"
+                            required
                             placeholder="G Meet Link"
                             className="block w-full px-3 py-2 mt-1 bg-white border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                           />
@@ -235,7 +294,9 @@ const CreateNewBatch = () => {
                             At what time of day?
                           </label>
                           <input
-                            type="time"  min="07:00" max="20:00"
+                            type="time"
+                            min="07:00"
+                            max="20:00"
                             name="time"
                             id="time"
                             ref={timeRef}
@@ -254,6 +315,7 @@ const CreateNewBatch = () => {
                             type="date"
                             name="date"
                             id="date"
+                            min={getCurrentDate()}
                             ref={dateRef}
                             required
                             className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"

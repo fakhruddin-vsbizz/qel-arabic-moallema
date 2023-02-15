@@ -1,12 +1,15 @@
 import React, { useContext, useRef, useEffect, useState } from "react";
 import AuthContext from "../store/auth-context";
 import supabase from "@/supabaseClient";
+import SuccessPrompt from "../layout/SuccessPrompt";
 
 const Group = ["Both", "teachers", "students"];
 
 const CreateAnnouncement = (props) => {
   const auth = useContext(AuthContext);
 
+  const [selectedDays, setSelectedDays] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
 
   const handleChange = (event) => {
@@ -58,6 +61,11 @@ const CreateAnnouncement = (props) => {
     });
 
     props.update();
+    titleRef.current.value = "";
+    batchNameRef.current.value = "";
+    decriptionRef.current.value = "";
+    setSelectedValue("");
+    setSubmitted(true);
   };
 
   return (
@@ -68,6 +76,12 @@ const CreateAnnouncement = (props) => {
           Create Announcement
         </h2>
         <form onSubmit={onAnnouncementHandler}>
+          {submitted && (
+            <SuccessPrompt
+              title="Announcement Created Successfully"
+              setSubmitted={setSubmitted}
+            />
+          )}
           <div className="overflow-hidden shadow sm:rounded-md md:mx-5">
             <div className="px-4 py-5 bg-white sm:p-6">
               <div className="grid grid-cols-6 gap-6 ">

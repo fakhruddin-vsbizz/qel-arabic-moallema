@@ -8,6 +8,8 @@ const LoginForm = () => {
   const router = useRouter();
   const authCtx = useContext(AuthContext);
 
+  const [serverError, setServerError] = useState(false);
+
   const [formEmailValid, setEmailIsValid] = useState(true);
   const [formPasswordValid, setPasswordIsValid] = useState(true);
 
@@ -51,6 +53,8 @@ const LoginForm = () => {
     console.log(data);
 
     if (error) {
+      setServerError(true);
+      console.log("err");
       return;
     }
 
@@ -114,6 +118,9 @@ const LoginForm = () => {
         <label htmlFor="address">Password</label>
         <input type="password" id="password" ref={passwordRef} />
         {passwordError}
+        {!passwordError && serverError && (
+          <p className=" text-red-500 mt-2">Invalid email or password</p>
+        )}
       </div>
       <div className={styles.actions}>
         <button>Login</button>

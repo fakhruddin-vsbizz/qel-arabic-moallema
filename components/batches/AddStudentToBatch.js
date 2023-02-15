@@ -36,6 +36,7 @@ const AddStudentToBatch = (props) => {
       .insert({ student_id: email, batch_id: selectedBatch })
       .select();
 
+    props.submit(true);
     props.show(false);
   };
 

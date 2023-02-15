@@ -1,6 +1,13 @@
 import React from "react";
+import SuccessPrompt from "./SuccessPrompt";
 
-const DeleteConfirmation = ({ title, desc, deleteUser, close }) => {
+const DeleteConfirmation = ({
+  title,
+  desc,
+  deleteUser,
+  close,
+  deleteUserPopup,
+}) => {
   const submitHandler = (e) => {
     e.preventDefault();
     deleteUser();
@@ -15,6 +22,12 @@ const DeleteConfirmation = ({ title, desc, deleteUser, close }) => {
         <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
       </div>
       <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+        {deleteUserPopup && (
+          <SuccessPrompt
+            setSubmitted={setSubmitted}
+            title="User Removed Successfully !!"
+          />
+        )}
         <form onSubmit={submitHandler} className="px-10 py-10 mb-4">
           <p className=" mb-4"> {desc}</p>
           <button
