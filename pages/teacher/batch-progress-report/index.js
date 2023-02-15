@@ -7,7 +7,7 @@ import React from "react";
 const BatchProgressReport = () => {
   return (
     <div>
-      <Navigation />
+      {/* <Navigation /> */}
       <div className="flex">
         <TeacherSidebar />
         <div className="flex-1 h-screen p-10 mx-5">

@@ -235,7 +235,7 @@ const CreateNewBatch = () => {
                             At what time of day?
                           </label>
                           <input
-                            type="text"
+                            type="time"  min="07:00" max="20:00"
                             name="time"
                             id="time"
                             ref={timeRef}

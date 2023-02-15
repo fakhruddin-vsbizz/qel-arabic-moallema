@@ -7,7 +7,7 @@ const index = () => {
   return (
     <>
       <div className="">
-        <Navigation />
+        {/* <Navigation /> */}
         <div className="flex">
       <AdminSidebar/>
       <div className="flex items-center justify-center ">

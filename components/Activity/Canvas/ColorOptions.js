@@ -57,11 +57,11 @@ const ColorOptions = (props) => {
             "https://cdn-icons-png.flaticon.com/512/15/15166.png"
           }
         />
-        <ColorButton
+        {/* <ColorButton
           color={"white"}
           change={changeColorSec}
           img={"https://cdn-icons-png.flaticon.com/512/1827/1827954.png"}
-        />
+        /> */}
         {/* <ColorButton color={"pink"} change={changeColorSec}  />
         <CanvasButton color={"white"}  imgSrc={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIHydCKAhPub6naDOzOPbhBiFj2R9BWptEnMlXLzM&s"} action="setToDraw"  />
         <CanvasButton color={"white"}  imgSrc={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIUi5JWEv8IX_9yrhhDPbxA3jlhBKvzgioqR0ml6b9&s"} action="setToErase"  /> */}

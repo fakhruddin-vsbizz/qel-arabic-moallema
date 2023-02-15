@@ -7,7 +7,7 @@ import React from "react";
 const index = () => {
   return (
     <div className="h-screen bg-slate-100">
-      <Navigation />
+      {/* <Navigation /> */}
       <div className="flex">
       <AdminSidebar/>
       <div  className="flex-1 h-full p-7">

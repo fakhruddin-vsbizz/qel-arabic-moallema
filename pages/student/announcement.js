@@ -7,7 +7,7 @@ const announcement = () => {
   return (
     <div>
         
-        <Navigation />
+        {/* <Navigation /> */}
         <div className="flex">
           <StudentSidebar />
           <div className="flex-1 h-screen p-7 bg-slate-300">

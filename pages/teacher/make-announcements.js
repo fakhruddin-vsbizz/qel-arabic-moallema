@@ -7,7 +7,7 @@ import React from 'react'
 const MakeAnnouncements = () => {
   return (
     <div>
-        <Navigation />
+        {/* <Navigation /> */}
       <div className="flex">
       <TeacherSidebar/>
       <div  className="flex-1 h-full p-7">

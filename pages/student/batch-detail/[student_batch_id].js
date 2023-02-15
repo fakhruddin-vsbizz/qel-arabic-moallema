@@ -11,7 +11,7 @@ const index = () => {
 
   return (
     <div>
-      <Navigation />
+      {/* <Navigation /> */}
       <div className="flex">
         <StudentSidebar />
         <div className="h-screen flex-1 p-7 -mt-12">

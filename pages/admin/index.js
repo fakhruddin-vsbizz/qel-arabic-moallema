@@ -14,7 +14,7 @@ const Admin = () => {
         <div className="h-screen ">
           {authCtx.isLoggedIn && (
             <div>
-              <Navigation />
+              {/* <Navigation /> */}
               <div className="flex">
                 <AdminSidebar />
                 <div className="flex-1 h-full p-7">
