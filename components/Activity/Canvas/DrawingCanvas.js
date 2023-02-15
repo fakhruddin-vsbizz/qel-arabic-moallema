@@ -19,7 +19,7 @@ const DrawingCanvas = (props) => {
 
   let canvas = canvasRef.current;
   // var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
-  var width = (window.innerWidth)*3/5
+  var width = (window.innerWidth * 3) / 5;
 
   let context;
   if (canvas) {
@@ -27,8 +27,8 @@ const DrawingCanvas = (props) => {
   }
   useEffect(() => {
     canvas = canvasRef.current;
-    canvas.width = width;
-    canvas.height = 200;
+    canvas.width = 600;
+    canvas.height = 330;
 
     context = canvas.getContext("2d");
     context.lineCap = "round";
@@ -75,7 +75,7 @@ const DrawingCanvas = (props) => {
   const setToClear = () => {
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    
+
     var w = canvas.width;
     canvas.width = 1;
     canvas.width = w;
@@ -123,24 +123,18 @@ const DrawingCanvas = (props) => {
         ></canvas>
       </div>
       <div className="mt-8 ml-20">
-        <button
-          onClick={setToDraw}
-          className="px-4 py-2 ml-4 text-white rounded-md bg-dark-purple hover:bg-dark-purple hover:shadow-lg"
-        >
-          Draw
-        </button>
-        <button
-          onClick={setToErase}
-          className="px-4 py-2 ml-4 text-white rounded-md bg-dark-purple hover:bg-dark-purple hover:shadow-lg"
-        >
-          Erase
-        </button>
-        <button
-          onClick={setToClear}
-          className="px-4 py-2 ml-4 text-white rounded-md bg-dark-purple hover:bg-dark-purple hover:shadow-lg"
-        >
-          Clear
-        </button>
+        {/* <button
+            onClick={setToDraw}
+            className="px-4 py-2 ml-4 text-white rounded-md bg-dark-purple hover:bg-dark-purple hover:shadow-lg"
+          >
+            Draw
+          </button>
+          <button
+            onClick={setToErase}
+            className="px-4 py-2 ml-4 text-white rounded-md bg-dark-purple hover:bg-dark-purple hover:shadow-lg"
+          >
+            Erase
+          </button> */}
         <a
           className="p-3 ml-4 text-white bg-red-500 rounded-md md:mt-40 hover:bg-red-600 hover:shadow-lg"
           id="download_image_link"
@@ -150,7 +144,6 @@ const DrawingCanvas = (props) => {
           Submit Activity
         </a>
       </div>
-      {/* <img src={alifVector01.src} alt="" /> */}
     </>
   );
 };

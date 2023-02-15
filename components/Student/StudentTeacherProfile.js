@@ -5,12 +5,15 @@ import AddStudentToBatch from "../batches/AddStudentToBatch";
 import { createClient } from "@supabase/supabase-js";
 import DeleteConfirmation from "../layout/DeleteConfirmation";
 import { useRouter } from "next/router";
+import SuccessPrompt from "../layout/SuccessPrompt";
 
 const StudentTeacherProfile = (props) => {
   const router = useRouter();
   const [profileData, setProfileData] = useState([{}]);
   const [batchdata, setBatchData] = useState([]);
   const [showRemoveUser, setShowRemoveUser] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [deleteUser, setDeleteUser] = useState(false);
 
   const [showAddBatch, setShowAddBatch] = useState(false);
   const type = props.role;
@@ -21,7 +24,7 @@ const StudentTeacherProfile = (props) => {
       .select("*")
       .eq("email", props.email)
       .then((response) => setProfileData(response.data));
-  }, []);
+  }, [submitted]);
 
   //getting the batch data for the student
   useEffect(() => {
@@ -30,7 +33,7 @@ const StudentTeacherProfile = (props) => {
       .select("*")
       .eq("student_id", props.email)
       .then((res) => setBatchData(res.data));
-  }, []);
+  }, [submitted]);
 
   //show/hide the pop-up form
   const addStudentToBatch = () => {
@@ -55,6 +58,12 @@ const StudentTeacherProfile = (props) => {
       //remove from the relation
       const { data1, error1 } = await supabase
         .from("batch_student_relation")
+        .delete()
+        .match({ student_id: profileData[0].email });
+
+      //remove from the relation
+      const { data4, error4 } = await supabase
+        .from("assignments")
         .delete()
         .match({ student_id: profileData[0].email });
 
@@ -111,13 +120,22 @@ const StudentTeacherProfile = (props) => {
       .delete()
       .match({ email: profileData[0].email });
 
+    setDeleteUser(true);
     router.replace("/");
   };
 
   return (
     <>
       <Navigation />
+
       <header className="flex flex-wrap"></header>
+      {submitted && (
+        <SuccessPrompt
+          setSubmitted={setSubmitted}
+          title="Batch Added Successfully to Student"
+        />
+      )}
+
       <div className="h-screen grid grid-cols-3">
         <div className="lg:col-span-2 col-span-3 bg-indigo-50 space-y-8 px-12">
           <div className="rounded-md mt-12">
@@ -228,6 +246,7 @@ const StudentTeacherProfile = (props) => {
         </div>
         {showAddBatch && (
           <AddStudentToBatch
+            submit={setSubmitted}
             show={setShowAddBatch}
             studentEmail={profileData[0].email}
             batch={batchdata}
@@ -235,6 +254,7 @@ const StudentTeacherProfile = (props) => {
         )}
         {showRemoveUser && (
           <DeleteConfirmation
+            deleteUserPopup={deleteUser}
             title={`Remove ${profileData[0].type}`}
             desc={"You are removing the user permanently"}
             deleteUser={deleteUserByEmail}
