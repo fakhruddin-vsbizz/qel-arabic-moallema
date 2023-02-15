@@ -80,15 +80,15 @@ const LetterDetails = (props) => {
               </div>
               {showCanvas && (
                 <div>
-                  <h2 className="mt-10 text-2xl font-extrabold border-b text-dark-purple pc-2">
+                  <h2 className="my-20 text-2xl font-extrabold border-b text-dark-purple pc-2 ">
                     Start Drawing
                   </h2>
 
-                  <div className="grid w-full grid-cols-8 mx-0 mt-5">
-                    <div className="col-span-3 p-24 m-5 sm:-mt-16">
+                  <div className="grid w-full grid-cols-8 mx-0 mt-5 ">
+                    <div className="col-span-8 p-5 mt-15 sm:-mt-16">
                       <ColorOptions finalColor={changeColorPri} />
                     </div>
-                    <div className="w-full col-span-5 m-4 ">
+                    <div className="w-full col-span-8 m-4 ">
                       <DrawingCanvas color={getColor} className="w-full " />
                     </div>
                   </div>

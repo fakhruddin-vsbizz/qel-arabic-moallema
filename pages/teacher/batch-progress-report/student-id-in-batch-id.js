@@ -8,7 +8,7 @@ import React from "react";
 const StudentIdInBatchId = () => {
   return (
     <div>
-      <Navigation />
+      {/* <Navigation /> */}
       <div className="flex">
         <TeacherSidebar />
         <div className="flex-1 h-screen p-10 mx-5">
@@ -86,9 +86,9 @@ const StudentIdInBatchId = () => {
             <div className="col-span-1">
               <GeneralCard
                 title="Chapter 1"
-                disc="acvscdsv"
+                disc="Teacher remarks: Lorem ipsum dolor....."
                 btnText="view"
-                link="batch-progress-report/chapter-id"
+                link=""
               />
             </div>
             <div className="col-span-1">
@@ -96,7 +96,7 @@ const StudentIdInBatchId = () => {
                 title="Chapter 2"
                 disc="acvscdsv"
                 btnText="view"
-                link="batch-progress-report/chapter-id"
+                link=""
               />
             </div>
             <div className="col-span-1">
@@ -117,7 +117,7 @@ const StudentIdInBatchId = () => {
             <div className="col-span-1">
               <GeneralCard
                 title="chapter 4"
-                disc="acvscdsv"
+                disc="Teacher remarks: Lorem ipsum dolor....."
                 btnText="view"
                 link=""
               />

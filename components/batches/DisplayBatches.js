@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from "react";
 import Link from "next/link";
 import AuthContext from "../store/auth-context";
 import { useRouter } from "next/router";
+import logo from '@/components/src/AMLogo.png'
 
 const CourseCard = ({ title, book, id, path }) => (
   <div className="max-w-sm rounded overflow-hidden shadow-lg items-center justify-center bg-white">
@@ -11,7 +12,7 @@ const CourseCard = ({ title, book, id, path }) => (
 
       <p className="text-gray-700 text-base">Book Name - {title}</p>
 
-      <div className="bg-gray-100 mt-4 py-2">
+      <div className=" mt-4 py-2">
         <Link
           href={`${path}/batch-detail/${id}`}
           className="inline-flex justify-center rounded-md border border-transparent bg-dark-purple py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-dark-purple focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -69,7 +70,7 @@ const DisplayBatches = ({ typeUser, email }) => {
       <div>
         <img
           className="mx-auto h-12 w-auto mt-10"
-          src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+          src={logo.src}
           alt="Workflow"
         />
         <h2 className="mt-6 text-center text-2xl font-extrabold text-gray-800">
@@ -78,7 +79,7 @@ const DisplayBatches = ({ typeUser, email }) => {
           {typeStudent && <p>You are enrolled in following batches</p>}
         </h2>
       </div>
-      <div className="w-full h-screen bg-slate-300">
+      <div className="w-full h-full ">
         <div className="flex flex-wrap m-4 item-center mt-12 ml-16  pt-10">
           {auth.batchesList.map((batch) => (
             <div className="w-1/3 p-4" key={batch.id}>
