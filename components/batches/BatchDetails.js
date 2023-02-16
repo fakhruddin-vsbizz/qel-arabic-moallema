@@ -10,6 +10,7 @@ import Link from "next/link";
 import BatchContext from "../store/batch-context";
 
 const BatchDetails = (props) => {
+
   const type = props.type;
   console.log(props.type);
 

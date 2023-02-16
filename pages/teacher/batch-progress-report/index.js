@@ -3,16 +3,17 @@ import ProgressCard from "@/components/Activity/ProgressCard";
 import TeacherSidebar from "@/components/Sidebar/TeacherSidebar";
 import GeneralCard from "@/components/layout/GeneralCard";
 import React from "react";
+import grayBgImg from "@/components/src/grayBgImg.png"
 
 const BatchProgressReport = () => {
   return (
     <div>
       {/* <Navigation /> */}
-      <div className="flex">
+      <div className="flex" style={{backgroundImage: `url(${grayBgImg.src})`, backgroundAttachment: 'fixed', backgroundSize: "100%", backgroundPosition: 'center top'}}>
         <TeacherSidebar />
-        <div className="flex-1 h-screen p-10 mx-5">
+        <div className="flex-1 min-h-screen h-full p-10 mx-5">
           {/* {Menus.map((Menu, index) => ( */}
-          <div className="grid grid-cols-3 gap-5 p-3 m-0 rounded-md shadow-md md:p-5 md:grid-cols-5 bg-slate-50">
+          <div className="grid grid-cols-3 gap-5 p-3 m-0 rounded-md shadow-md md:p-5 md:grid-cols-5">
             <div className="col-span-2 ">
               <label
                 htmlFor="Teacher"

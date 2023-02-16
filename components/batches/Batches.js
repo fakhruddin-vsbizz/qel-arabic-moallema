@@ -20,7 +20,7 @@ const Batches = () => {
 
   return (
     <>
-      <div className="w-full bg-slate-100">
+      <div className="w-full ">
         <div className="px-4 sm:px-6 lg:px-8 ">
           <div>
             <div class="flex items-center justify-center mb-3 mt-2">

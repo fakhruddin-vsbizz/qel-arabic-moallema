@@ -8,6 +8,8 @@ import { useContext } from "react";
 import Admin from "./admin";
 import StudentAccount from "./studentaccount";
 import { useRouter } from "next/router";
+import grayBgImg from "@/components/src/grayBgImg.png"
+
 
 export default function Home() {
   const authCtx = useContext(AuthContext);
@@ -38,7 +40,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main className={styles.main} style={{backgroundImage: `url(${grayBgImg.src})`, backgroundAttachment: 'fixed', backgroundSize: "100%", backgroundPosition: 'center top'}}>
         {!loggedIn && <LoginUser />}
         {loggedIn && typeAdmin && <Admin />}
         {/* {!typeAdmin && !loggedIn && <StudentAccount />} */}

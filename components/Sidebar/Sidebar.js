@@ -24,7 +24,7 @@ const Sidebar = (props) => {
     { title: `${props.title4}`, src: `${props.src4}`, link: `${props.link4}` },
   ];
   return (
-    <div className="flex">
+    <div className="flex ">
       <div
         className={` ${
           open ? "w-72" : "w-20 "
@@ -61,7 +61,7 @@ const Sidebar = (props) => {
         </div>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
-            <Link href={Menu.link}>
+            <Link href={Menu.link} >
               <li
                 key={index}
                 className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
@@ -78,31 +78,44 @@ const Sidebar = (props) => {
               </li>
             </Link>
           ))}
-
-          <li
-            className="flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 mt-9mt-2 bg-light-white"
-          >
-            <button
-          type="button"
-          class="flex  text-sm bg-yellow-100 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-          id="user-menu-button"
-          aria-expanded="false"
-          data-dropdown-toggle="user-dropdown"
-          data-dropdown-placement="bottom"
-        >
-          <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full" src={avatar.src} alt="user photo" />
-        </button>
-            <button
-              onClick={logoutHandler}
-              class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-500 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-100 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-            >
-              Log-Out
-            </button>{" "}
-          </li>
         </ul>
 
-        
+        <ul className="mt-20">
+          <li className="flex my-3 rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 mt-9mt-2 bg-light-white">
+            <button
+              type="button"
+              className="flex  text-sm bg-yellow-100 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              id="user-menu-button"
+              aria-expanded="false"
+              data-dropdown-toggle="user-dropdown"
+              data-dropdown-placement="bottom"
+            >
+              <span className="sr-only">Open user menu</span>
+              <img
+                className="w-8 h-8 rounded-full"
+                src={avatar.src}
+                alt="user photo"
+              />
+            </button>
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+              My Profile
+            </span>
+          </li>
+          <li  onClick={logoutHandler} className="flex my-3  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 mt-9mt-2 bg-light-white">
+            <button
+             
+              className={` block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-500 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-100 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700`}
+            >
+              <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk8rXmrbwkvOlRL-sbIRH2WiY5rkThzKMx9g&usqp=CAU"
+            className="w-8 h-8 rounded-full"
+          />
+            </button>
+            <span className={`${!open && "hidden"}  origin-left duration-200`}>
+              Log-Out
+            </span>
+          </li>
+        </ul>
       </div>
     </div>
   );
