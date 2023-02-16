@@ -1,12 +1,7 @@
-import TeacherSignUp from "@/components/Teacher/TeacherSignUp";
 import React from "react";
 
 const StudentAccount = () => {
-  return (
-    <div>
-      <TeacherSignUp />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default StudentAccount;

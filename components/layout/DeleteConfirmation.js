@@ -7,6 +7,7 @@ const DeleteConfirmation = ({
   deleteUser,
   close,
   deleteUserPopup,
+  setSubmitted,
 }) => {
   const submitHandler = (e) => {
     e.preventDefault();

@@ -25,7 +25,6 @@ const Admin = () => {
                   <div className="flex items-center justify-center mt-36">
                     <Card /> 
                   </div>
-                  {/* ))} */}
                 </div>
               </div>
             </div>
