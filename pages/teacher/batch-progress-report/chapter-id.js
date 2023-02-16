@@ -4,15 +4,16 @@ import TeacherSidebar from "@/components/Sidebar/TeacherSidebar";
 import StudentListCard from "@/components/layout/StudentListCard";
 import React from "react";
 import Link from "next/link";
+import grayBgImg from "@/components/src/grayBgImg.png"
 
 const chapterId = () => {
   return (
     <div>
       {/* <Navigation /> */}
-      <div className="flex">
+      <div className="flex" style={{backgroundImage: `url(${grayBgImg.src})`, backgroundAttachment: 'fixed', backgroundSize: "100%", backgroundPosition: 'center top'}}>
         <TeacherSidebar />
-        <div className="flex-1 h-screen p-10 mx-5">
-          <div className="grid grid-cols-3 gap-5 p-3 m-0 rounded-md shadow-md md:p-5 md:grid-cols-5 bg-slate-50">
+        <div className="flex-1 min-h-screen h-full p-10 mx-5">
+          <div className="grid grid-cols-3 gap-5 p-3 m-0 rounded-md shadow-md md:p-5 md:grid-cols-5 ">
             <div className="col-span-2 ">
               <label
                 htmlFor="Teacher"
