@@ -254,6 +254,7 @@ const StudentTeacherProfile = (props) => {
         )}
         {showRemoveUser && (
           <DeleteConfirmation
+            setSubmitted={setSubmitted}
             deleteUserPopup={deleteUser}
             title={`Remove ${profileData[0].type}`}
             desc={"You are removing the user permanently"}
